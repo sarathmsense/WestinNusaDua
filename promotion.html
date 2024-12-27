@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hotel_service.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <script type="text/javascript">
+        window.onerror = function (msg, url, linenumber) {
+            // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(71, 62, 62);z-index:999;">
+    </div>
+    <!-- Preloader -->
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt=""> <div class="wrapper-overlay"></div> </div>
+    <div id="preloader" class="preloader d-none">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper position-relative">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr w-100 text-center"> <img src="images/marriot-logo.png" alt=""
+                                class="logo">
+                        </div>
+                    </div>
+                    <div class="col-9 text-center">
+                        <h2 class="text-white mb-0 cption-slde"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <h5 class="mb-0 w-100 text-uppercase"> <strong> Promotion</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+
+                                <div class="col-12 cnt-cl mt-2 act text-uppercase" data-id="Home">
+                                    <span href="home.html?fromurl=promo" class="loc-url">Home</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-center'>
+                                    <div id='date-part'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-9 col-cnte pl-1 desc-conte bg sld-hgt">
+
+                        <div id="carouselPromotionControls" class="carousel slide carousel-fade r-carousel m-auto" data-pause="false" data-touch="false" data-interval="10000">
+                            <ol class="carousel-indicators" style="bottom: 90px">
+                              <!-- Indicators Rendered here -->
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                 <!-- right Menu Content Rendered Here -->
+                            </div>
+                            <div class="carousel-control">
+                               <!-- Carousel Contrls Rendered Here -->
+                            </div>
+                            <div class="no-msg" id="no-msg">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="nt-avlbl"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <!-- <script src="js/hotel-service.js"></script> -->
+
+    <script type="text/javascript">
+         $('#no-msg').hide();
+        $(document).ready(function () {
+            promotionData();
+            captionUpdate();
+            setTimeout(fngetroomfromwebapi, 500);
+
+            var guestroomno = queryString("room");
+            fnch_logwriter('Promotion', guestroomno, 0);
+
+            $('.carousel').carousel({
+                interval: 10000,
+                pause: false
+            }).on('slid.bs.carousel', function () {
+                currentSlide = $('.active');
+            });
+
+            jQuery(document).bind('keydown', function (e) {
+
+                if (e.keyCode == 39) {
+                    jQuery('button.carousel-control-next').trigger('click');
+                    captionUpdate();
+                }
+                if (e.keyCode == 37) {
+                    jQuery('button.carousel-control-prev').trigger('click');
+                    captionUpdate();
+                }
+                if (e.keyCode == 13) {
+                    var href = $('.cnt-cl.act .loc-url').attr('href');
+                    // var menu_select = $('.cnt-cl.act').data("id");
+                    if (href.length > 0) {
+                        setTimeout(function () { window.location = (href); }, 100);
+                    }
+                }
+                if (e.keyCode == 10182 || e.keyCode == 10009) {
+                    bckbtnpressed();
+                }
+                if (e.keyCode == 10071) {
+                    homepageshowing();
+                }
+
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+
+
+        $('.carousel').carousel();
+
+        function bckbtnpressed() {
+            fnch_logwriter('Promotion back_event',0,0);
+            window.location = "home.html?fromurl=promo";
+        }
+        function homepageshowing() {
+            fnch_logwriter('Promotion home_event',0,0);
+            window.location = "home.html?fromurl=promo";
+
+        }
+        function captionUpdate() {
+            var active_caption = $('.carousel-item.active').attr('data-caption');
+            console.log(active_caption,"active_caption");
+                $('.cption-slde').html(active_caption)
+
+                $('.carousel').bind('slid.bs.carousel', function () {
+                    var active_caption = $('.carousel-item.active').attr('data-caption');
+                    console.log(active_caption,"active_caption");
+                    $('.cption-slde').html(active_caption)
+                });
+        }
+
+
+
+        function promotionData(){
+            $.ajax({
+                type: "GET",
+                url: "http://" + middleware_ip +"/AdminPanel/main/template/Api/PromotionMgmt.php?hotelname=nusaDua", //LIVE server
+                // url: "downloadfile/MsenseChannelMap.xml",
+                contentType: "application/json",
+                timeout: 5000,
+                dataType: "json",
+                success: function (data) {
+                    // document.getElementById("logtext").innerHTML += "<br> data "+JSON.stringify(data) ;
+                    if(data.errorcode == "106"){
+                        $('#no-msg').show();
+                        $('#no-msg').text(data.errormsg);
+                        $('.carousel-control').hide();
+                        return;
+                    }
+                    if (data.errorcode != undefined && data.errorcode != "00"){
+                        $('#no-msg').show();
+                        $('#no-msg').text(data.errormsg);
+                        $('.carousel-control').hide();
+                        return;
+                    }
+                    let dataObj=data;
+                    console.log(dataObj,"obj");
+                    let promoData=dataObj.nusaDua.homepage.slider_data;
+
+
+                    if(promoData.length == 1){
+                        $('.carousel-control').hide();
+                        $('.carousel-indicators').hide();
+                    }
+
+                    console.log(promoData,"promoData");
+                    // $(".top-hdr img").attr("src", data.wbali.logo);
+                    let carouselData = "";
+                    let carouselIndicators = "";
+                    let carouselArrow = "";
+
+                    promoData.forEach((el, i) => {
+
+                        var filepathArray = el.filepath;
+                        var imgpath = 'http://' + middleware_ip + '/AdminPanel/main/template//' + filepathArray;
+                        carouselArrow = `<button class="carousel-control-prev" type="button" data-target="#carouselPromotionControls"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-target="#carouselPromotionControls"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </button>`;
+                            carouselIndicators+=`<li data-target="#carouselPromotionControls" data-slide-to="${i==el.orderid}" class="${i == 0 ? "active" : ''}">
+                                        </li>`
+
+                        var mediaTag = '';
+                        if (el.filetype == 0) {
+                            mediaTag = `<img src="${imgpath}" class="img-fluid pic-height">`;
+                        }
+                        else if (el.filetype == 1) {
+                            mediaTag = `
+                                <video class="img-fluid pic-height" src="${imgpath}"></video>`;
+                        }
+
+                            carouselData  +=`
+                                            <div class="carousel-item h-100 servc-sldr ${i == 0 ? "active" : ''}" data-caption="${el.caption?el.caption:""}">
+                                                <div class="d-flex sld-inner align-items-center promotion-vide">
+                                                    ${mediaTag}
+                                                    <div class="carousel-caption1 d-none d-md-block text-white">
+                                                        <h4>${el.text?el.text:""}</h4>
+                                                    </div>
+                                            </div>
+                                        </div>:
+                        `
+                    if(i==0) $('.cption-slde').html(el.caption)
+
+                    })
+
+                    document.querySelector(".carousel-inner").insertAdjacentHTML("beforeend", carouselData);
+                    if(promoData.length>1){
+                    document.querySelector(".carousel-indicators").insertAdjacentHTML("beforeend", carouselIndicators);
+                    document.querySelector(".carousel-control").insertAdjacentHTML("beforeend", carouselArrow);
+
+                    document.querySelectorAll('.carousel-item video').forEach(video => {
+                        addVideoEventListeners(video);
+                    });
+
+                    //If the first element is a video, load and autoplay the video.
+                    $('.carousel-item').each(function (i, item) {
+                        if (i === 0) {
+                            const firstChild = $(item).find('img, video').first();
+                            if (firstChild.prop('tagName').toLowerCase() === 'video') {
+                                VideoCallFunction();
+                            }
+                        }
+                    });
+                    }
+
+                },
+                error: function () {
+                    show_msg_guest('Please check the WiFi connection ID 03');
+                }
+            });
+        }
+
+
+    $('#carouselPromotionControls').on('slid.bs.carousel', function (e) {
+        VideoCallFunction();
+    });
+
+    function VideoCallFunction() {
+        var videos = document.querySelectorAll('.carousel-item video');
+        videos.forEach(video => {
+            video.pause();
+        });
+
+        var activeItem = document.querySelector('.carousel-item.active');
+        var activeVideo = activeItem.querySelector('video');
+
+        // document.getElementById("logtext").innerHTML += "<br> data "+activeVideo.src+ "video" + activeVideo;
+
+        if (activeVideo) {
+            activeVideo.src = activeVideo.src;
+            activeVideo.load(); // Reload the activeVideo element to apply the new source
+            activeVideo.play(); // Play the activeVideo
+        }
+    }
+
+
+    // video playing time carousal pause and listener waiting for video end time next automatically move to next one
+    function addVideoEventListeners(videoElementId) {
+
+        videoElementId.addEventListener('play', function() {
+            $('#carouselPromotionControls').carousel('pause');
+        });
+
+        videoElementId.addEventListener('ended', function() {
+            $('#carouselPromotionControls').carousel('next');
+            $('#carouselPromotionControls').carousel('cycle');
+        });
+    }
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W Bali</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/channel-guide.css">
+    <link rel="stylesheet" href="css/hotel_service.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script src="js/guest_service_msg.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+
+    <script type="text/javascript">        
+        window.onerror = function (msg, url, linenumber) {
+            // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+</head>
+ 
+<body>
+    <div class="clstext" id="logtext"
+    style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(245, 18, 41);z-index:999;">
+    </div>
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt=""> <div class="wrapper-overlay"></div> </div>
+    <!-- Preloader -->
+    <div id="preloader d-none">
+        <div id="status" style="text-align: center;">
+            <div class="loader4"></div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr text-center"> <img src="images/marriot-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                    <div class="col-8 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <!-- style="height:118px" -->
+                                <h5 class="mb-0 w-100 text-uppercase"><strong>Messages</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap text-uppercase">
+                                <div class="col-12 cnt-cl mt-2" data-id="Home"><span
+                                        href="home.html?fromurl=greet-msg" class="loc-url">Home</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-center'>
+                                    <!-- <div class="room-no"><strong>Room No: <span class="rm-no"></span>
+                                        </strong></div> -->
+                                    <div id='date-part'></div>
+                                    <!-- <div id='time-part'></div> -->
+                                    <!-- <img src="images/200x200_Top.svg" class="icon-nav " alt=""> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-cnte pl-2 message-pnl">
+                        <div class="messages-contain bg d-flex align-items-start justify-content-center">
+                            <div class="greet-msg-cnt text-white">
+                                <div class="message-contain">
+                                    <!-- <div class="message-header d-inline-block w-100 p-3">
+                                        <div class="pic-head"><img src="images/message-icon.png" alt=""></div>
+                                        <div class="text-head">Messages</div>
+                                    </div> -->
+                                    <div class="message-main-sec msgcontent" id="scrollable">
+                                        <ul class="messge-data" id="message-list">
+                                            <div class="no-msg" id="no-msg">
+                                            </div>
+
+                                            <div id="messageContainer">
+                                                <li class="mes-skel" style="background:#898888ba">             
+                                                    <div class="o-media__figure">
+                                                        <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                                    </div>             
+                                                </li>
+                                                <li class="mes-skel" style="background:#898888ba">             
+                                                    <div class="o-media__figure">
+                                                        <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                                    </div>             
+                                                </li>
+                                            </div>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <a href="javascript:void(0);" id="message_Anchor" onkeydown="message_keyevents.KeyHandler(event);"></a>
+
+   
+    <script type="text/javascript">
+        $(document).on('keydown', function(e) {
+            message_keyevents.KeyHandler(e);
+        });
+
+        $('#no-msg').hide();     
+        var ul = document.querySelector('ul');
+        var nodes = 0;
+        var selected = 0;
+
+        $(document).ready(function () {            
+            setTimeout(fngetroomfromwebapi, 200);           
+            setTimeout(displaymessagelist, 500);
+            // setInterval(fngetguestinfofromwebapi, 10000);
+            setInterval(displaymessagelist, 1000*60);
+            guestroomno = queryString("room");
+            var str_log = 'Messages';
+            fnch_logwriter(str_log, guestroomno, 0);
+
+        });   
+        
+       function bckbtnpressed() {
+            var str_log = 'Messages back_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "home.html?fromurl=greet-msg";
+        }
+        
+        function homepageshowing() {
+            var str_log = 'Messages home_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "home.html?fromurl=greet-msg";
+        }
+
+       
+
+    function select(el) {
+        //debugger
+        var s = [].indexOf.call(nodes, el);
+        if (s === -1) return;
+
+        selected = s;
+
+        var elHeight = $(el).height();
+        var scrollTop = $(ul).scrollTop();
+        var viewport = scrollTop + $(ul).height();
+        var elOffset = (elHeight + 30) * selected;
+        
+        $(ul).scrollTop(elOffset);
+        document.querySelector('li.selected').classList.remove('selected');
+        el.classList.add('selected');
+    }
+
+    </script>
+</body>
+
+</html>

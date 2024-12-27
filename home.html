@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/header.css">
+    <script type="text/javascript" src="$WEBAPIS/webapis/webapis.js"></script>
+    <script type="text/javascript" src="js/SamsungKeyReg.js"></script>
+    <script type="text/javascript" src="js/tvfninit.js"></script>
+</head>
+<script type="text/javascript">
+    // alert('aaa') push to git 2
+    window.onerror = function (msg, url, linenumber) {
+        // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+        // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+    }
+</script>
+
+<body>
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(245, 18, 41);z-index:999;">
+    </div>
+    <!-- Preloader -->
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt="">
+        <div class="wrapper-overlay"></div>
+    </div>
+    <div id="preloader" class="d-none">
+        <div id="status" style="text-align: center;">
+            <div class="loader4"></div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="top-hdr"> <img src="images/marriot-logo.png" alt="" class="logo"> </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <h5 class="mb-0 w-100"> <strong> Welcome </strong><br><span
+                                        class="whtr d-inline-block py-1"></span><br> Thank you for staying with us.</h5>
+                            </div>
+
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap align-items-center" id="menu-sec">
+                                <div class="col-12 cnt-cl mt-1" data-id="Vision+">
+                                    <span href="javascript:void(0)" class="loc-url">Watch <img
+                                            src="images/logo_visionpls.svg" alt="" class="logo-vpls">
+                                        <!--<sup>+</sup> --></span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-1" data-id="Connect my Device">
+                                    <span href="javascript:void(0)" class="loc-url">Connect my Device</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-1" data-id="Watch TV">
+                                    <span href="tv-channels.html" class="loc-url">Watch TV</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Indining">
+                                    <span href="inroom-dining.html?fromurl=inroom" class="loc-url">In Room Dining</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="spa">
+                                    <span href="spa.html?fromurl=spa" class="loc-url">Spa & Fitness</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Guest Directory">
+                                    <span href="hotel-about.html?fromurl=hotelabt" class="loc-url">Guest &nbsp;
+                                        Directory</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Promotion">
+                                    <span href="promotion.html?fromurl=promo" class="loc-url">Promotion</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Messages">
+                                    <span href="messages.html?fromurl=messages" class="loc-url">Messages</span>
+                                    <span
+                                        class="position-absolute badge-cnt top-0 start-100 translate-middle badge rounded-pill  blob yellow"
+                                        id="msgCount">&nbsp;</span></span>
+                                </div>
+                                <!-- <div class="col-12 cnt-cl mt-2"  data-id="Promo">
+                                    <span href="javascript:void(0)" class="loc-url">Promotion</span>
+
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-between'>
+                                    <div class="room-no"><strong>Room No: <span class="rm-no"></span>
+                                        </strong></div>
+                                    <div id='date-part'></div>
+                                    <!-- <img src="images/200x200_Top.svg" class="icon-nav " alt=""> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-cnte pr-3 pl-0">
+
+                        <div id="carouselslider" class="carousel slide carousel-fade r-carousel hm-carousel m-auto"
+                            data-pause="false" data-touch="false" data-interval="10000">
+                            <!-- <span class="loader"><img src="images/loader.gif" alt=""></span> -->
+                            <ol class="carousel-indicators">
+                                <!-- Indicators Rendered here -->
+                            </ol>
+                            <div class="carousel-inner">
+
+                                <!-- right Menu Content Rendered Here -->
+                            </div>
+                            <div class="carousel-control">
+                                <!-- Carousel Contrls Rendered Here -->
+                            </div>
+                        </div>
+
+                        <!-- <div id="carousel-fade" class="carousel carousel-fade home-carousel h-100" data-ride="carousel"
+                            data-interval="8000" data-pause="false">
+
+
+                            <div class="carousel-inner embed-responsive embed-responsive-16by9 h-100" role="listbox">
+                                
+
+                                <div class="carousel-item embed-responsive-item active">
+                                    <div class="d-flex justify-content-center ">
+                                        <div class="embed-responsive embed-responsive-21by9">
+                                            <video autoplay class="embed-responsive-item home-video" id="myVideo" src="http://172.18.96.3/tizendpswi/video/Introducing_Marriott_Bonvoy.mp4" poster="images/video-poster.jpg" loop></video>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <a class="carousel-control-prev" href="#carousel-fade" role="button" data-slide="prev"
+                                style="visibility: hidden;">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-fade" role="button" data-slide="next"
+                                style="visibility: hidden;">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="nt-avlbl"></div>
+                </div>
+            </div>
+
+            <!-- <div class="navigation-icon">
+                <div class="icon-cnte d-flex">
+                    <div class="col text-right">
+                        <div class="col-pic d-inline-block"><img src="images/200x200_Top.svg" class="icon" alt=""></div>
+
+                        <div class="cont-text d-inline-block">Navigation</div>
+                    </div>
+
+                </div>
+
+            </div> -->
+
+        </div>
+    </div>
+
+    <div class="modal evnt-panel" id="evnt-modal">
+        <div class="modal-dialog">
+
+            <div id="splsMsgImgOnly"> </div>
+            <div id="splsMsgImgContent"></div>
+            <div id="splsMsgContentOnly"></div>
+
+            <div class="button-action cnt-col">
+                <div id="shw-indi"></div>
+                <!-- <button type="button" class="btn btn-dark cnt-cl act" data-response="Home">Home</button> -->
+                <!-- <button type="button" class="btn btn-dark cnt-cl" data-response="Dont show again">Don't show again</button> -->
+            </div>
+
+            <!-- <div class="nav-info">
+                Use<img src="images/nav.png" alt="">navigate to home page
+            </div> -->
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <script src="js/tvch_handler.js"></script>
+    <script src="js/main.js"></script>
+    <!-- <script src="js/hotel-service.js"></script> -->
+    <script src="js/guest_service_msg.js"></script>
+    <script type="text/javascript" src="js/SamsungLaunchPrg.js"></script>
+    <script src="js/splashmsg.js"></script>
+
+    <script type="text/javascript">
+        var htmlsourcestatus = 0;
+        var irkitip = '0';
+        var LGTVRoom = 0;
+        var previou_time = 0;
+        $(".blob.yellow").css('visibility', 'hidden');
+        var is_to_shwmsg = null;
+        // var videoElement = document.getElementById('myVideo');
+        $(document).ready(function () {
+            get_homepage_data();
+            setTimeout(fngetroomfromwebapi, 200);
+            setTimeout(fngetguestnamefromwebapi, 500);
+            setInterval(fngetguestnamefromwebapi, 60 * 1000); // two min
+            setInterval(displaymsgcnt, 30 * 1000);
+            setTimeout(displaymsgcnt, 2000);
+            setTimeout(function () { fnch_logwriter('Homev09', guestroomno, 0) }, 2000);
+            setTimeout(function () { sendProductinfo(guestroomno); }, 2000);
+            setTimeout(function () { registerKey(); }, 1000);
+            is_to_shwmsg = queryString("fromurl");
+            // setTimeout(function(){msg_handler();}, 2000);
+
+            $("#carouselslider").carousel({
+                interval: 7000 // Set interval to 100000ms (10 seconds)
+            });
+
+        });
+        function msg_handler() {
+            if (is_to_shwmsg != undefined && is_to_shwmsg != null && is_to_shwmsg != 'false' && is_to_shwmsg == 'loader') {
+                // if (is_to_shwmsg != undefined &&  is_to_shwmsg != null &&  is_to_shwmsg != 'false' && is_to_shwmsg == 'loader' && is_chkinroom == true){
+                // show_Message();
+                setTimeout(function () { displaySplashMsg() }, 1000);
+
+            }
+
+        }
+        function videoply() {
+            videoElement.get(0).play();
+        }
+        function bckbtnpressed() {
+
+        }
+        function YouTubebtnpressed() {
+            console.log("htmlsourcestatus " + htmlsourcestatus);
+
+        }
+        function homepageshowing() {
+
+        }
+        function setState(argstatus) {
+            htmlsourcestatus = argstatus;
+        }
+
+        // videoElement.addEventListener('error', function() {
+        //     /* Video playback failed: show an error message */
+        //     switch (videoElement.error.code) {
+        //         case 1:
+        //             // show_msg_guest('MEDIA_ERR_ABORTED : 1, Media data download is stopped by the user');
+        //             show_msg_guest('WiFi disconnected ID 01');
+        //             videoply();
+        //             break;
+        //         case 2:
+        //             // show_msg_guest('MEDIA_ERR_NETWORK : 2, Download stopped due to network error');
+        //             show_msg_guest('WiFi disconnected ID 02');
+        //             videoply();
+        //             break;
+        //         case 3:
+        //             // show_msg_guest('MEDIA_ERR_DECODE : 3, Media data decoding failure');
+        //             show_msg_guest('WiFi disconnected ID 03');
+        //             videoply();
+        //             break;
+        //         case 4:
+        //             // show_msg_guest('MEDIA_ERR_SRC_NOT_SUPPORTED : 4, Format not supported');
+        //             show_msg_guest('WiFi disconnected ID 04');
+        //             videoply();
+        //             break;
+        //     }
+        // }, false);
+
+        function get_homepage_data() {
+            $.ajax({
+                type: "GET",
+                url: baseURL + "json/WestinNusaDua.json", //LIVE server
+                contentType: "application/json",
+                timeout: 5000,
+                dataType: "json",
+                success: function (data) {
+                    comn_htl_data = data;
+                    // console.log(comn_htl_data);
+                    fn_homepage_data(comn_htl_data);
+                    // menu_count(count);
+                },
+                error: function () {
+                    show_msg_guest("Please check network connectivity. (ID02)")
+
+                },
+            });
+        }
+        function fn_homepage_data(data) {
+            try {
+                let carouselindicators = "";
+                let carouseldata = "";
+                let carouselArrow = "";
+                let qrBlock = "";
+                let menudata = "";
+                document.querySelector(".carousel-indicators").innerHTML = "";
+                document.querySelector(".carousel-inner").innerHTML = "";
+                document.querySelector(".carousel-control").innerHTML = "";
+
+                // $(".top-hdr img").attr("src", baseURL + data.mhrs.logo)
+                let data1 = data.nusaDua.homepage;
+                // console.log(data1,"data1");
+                let menu_values = data1.menu_items;
+                let values = data1.slider_Image;
+
+                carouselArrow = `<button class="carousel-control-prev" type="button" data-target="#carouselslider"data-slide="prev">
+           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+           <span class="sr-only">Previous</span>
+           </button>
+           <button class="carousel-control-next" type="button" data-target="#carouselslider"data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+           </button>`
+
+                menu_values.map((el, i) => {
+                    menudata += `<div class="col-12 cnt-cl mt-2 hm-menu" id="${i + 1}" data-id="${el.data_id}" data-segment="${el.data_segment}">
+              <span href="" class="loc-url"> ${el.content}</span>
+            </div>`;
+                    console.log(el.data_segment, "data_segment");
+                });
+
+                values.map((el, i) => {
+
+                    carouselindicators += `<li data-target="#carousel" data-slide-to="${i}" class="${i == 0 ? "active" : ""}" ></li>`;
+                    carouseldata += `
+           <div class="carousel-item h-100 servc-sldr ${i == 0 ? "active" : ""}" data-caption="">
+                                          <div class="d-flex sld-inner align-items-center">
+                                              <img src="${baseURL + el.image}" class="img-fluid pic-height shadow-cust">
+  
+                                          </div>
+                                      </div>`;
+                });
+
+                document.querySelector(".carousel-inner").insertAdjacentHTML("beforeend", carouseldata);
+                if ($(".menu-sec > div").length == 0)
+                    document.querySelector(".menu-sec").insertAdjacentHTML("beforeend", menudata);
+
+                // if ($(".menu-sec > div").length > 0) keyData();
+                if (values.length > 1) {
+                    document.querySelector(".carousel-indicators").insertAdjacentHTML("beforeend", carouselindicators);
+                    document.querySelector(".carousel-control").insertAdjacentHTML("beforeend", carouselArrow);
+
+                }
+                $('#carouselslider').on('slid.bs.carousel', function () {
+                    var active_caption = $(".carousel-item.active").attr("data-caption");
+                    var active_logo = $('.carousel-item.active').attr('data-image');
+                    // console.log(active_logo);
+                    $(this).carousel({
+                        interval: 100 // Set interval to 100000ms (30 seconds)
+                    });
+                    $(".cption-slde").html(active_caption);
+                    if (active_logo !== '')
+                        $('.cption-slde').prepend('<img id="theImg" src="' + active_logo + '" />')
+                    else $(".cption-slde").html(active_caption);
+                });
+
+                totalLen = $('.cnt-col .cnt-cl').length;
+            }
+            catch (error) {
+                console.log("Error occured :: " + error.message);
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

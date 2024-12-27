@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hotel_service.css">
+     <link rel="stylesheet" href="css/header.css">
+
+    <script type="text/javascript">
+        window.onerror = function (msg, url, linenumber) {
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(255, 6, 6);z-index:999;">
+        <a href='javascript:void(0);' id='anchor' onkeydown='keyDown();'></a>
+    </div>
+
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt=""> <div class="wrapper-overlay"></div> </div>
+    <!-- Preloader -->
+    <!-- <div id="preloader" class="preloader d-none">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="wrapper">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr  text-center"> <img src="images/marriot-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                    <div class="col-9 text-center">
+                        <h2 class="text-white mb-0 pt-5"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <h5 class="mb-0 w-100 text-uppercase"> <strong> In Room Dining</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+                                <div class="col-12 cnt-cl mt-1 act" data-id="Home_inroom">
+                                    <span href="home.html?fromurl=inroom" class="loc-url">Home</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-center'>
+
+                                    <div id='date-part'></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-cnte pr-3 pl-0 desc-conte bg sld-hgt" style="display:none">
+
+                        <div id="carouselExampleControlsNoTouching"
+                            class="carousel slide carousel-fade r-carousel m-auto" data-pause="false" data-touch="false"
+                            data-interval="false">
+                           <ol class="carousel-indicators" style="bottom: 90px">
+                                 <!-- Indicators Rendered here -->
+                            </ol>
+                            <div class="carousel-inner">
+                                 <!-- right Menu Content Rendered Here -->
+                            </div>
+                            <div class="carousel-control">
+                                <!-- Carousel Contrls Rendered Here -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="nt-avlbl"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <!-- <script src="js/hotel-service.js"></script> -->
+
+    <script type="text/javascript">
+        var guestroomno = "";
+        $(document).ready(function () {
+            get_inroominfo_data()
+            setTimeout(fngetroomfromwebapi, 1000);
+            setTimeout(fngetguestnamefromwebapi, 2000);
+            guestroomno = queryString("room");
+            fnch_logwriter('Inroom-Dining', guestroomno, 0);
+
+            $('#carouselExampleControlsNoTouching').carousel({
+                interval: 10000,
+                pause: false,
+                wrap: false
+            })
+
+            jQuery(document).bind('keydown', function (e) {
+
+                if (e.keyCode == 39) {
+                    jQuery('#carouselinroom button.carousel-control-next').trigger('click');
+                }
+                if (e.keyCode == 37) {
+                    jQuery('#carouselinroom button.carousel-control-prev').trigger('click');
+                }
+                if (e.keyCode === 13) {
+                    var href = $('.cnt-cl.act .loc-url').attr('href');
+                    // var menu_select = $('.cnt-cl.act').data("id");
+                    if (href.length > 0) {
+                        setTimeout(function () { window.location = (href); }, 100);
+                    }
+                }
+                if (e.keyCode == 10182 || e.keyCode == 10009 || e.keyCode== 66) {
+                    bckbtnpressed();
+                }
+                if (e.keyCode == 10071) {
+                    homepageshowing();
+                }
+
+            });
+
+            });
+
+        </script>
+        <script type="text/javascript">
+
+
+            $('.carousel').carousel();
+
+            function bckbtnpressed() {
+                var str_log='Inroom-Dining back_event';
+                fnch_logwriter(str_log,0,0);
+                window.location = "home.html?fromurl=inroom";
+            }
+            function homepageshowing() {
+                var str_log='inroom-dining home_event';
+                fnch_logwriter(str_log,0,0);
+                window.location = "home.html?fromurl=inroom";
+
+            }
+
+
+function get_inroominfo_data(){
+  $.ajax({
+    type: "GET",
+    url: baseURL + "json/WestinNusaDua.json", //LIVE server
+    // url: "downloadfile/MsenseChannelMap.xml",
+    contentType: "application/json",
+    timeout: 5000,
+    dataType: "json",
+    success: function (data) {
+                $(".col-cnte").css("display","block")
+      comn_htl_data=data;
+      fn_inroomInfo_data(comn_htl_data);
+    },
+    error: function () {
+        show_msg_guest("Please check network connectivity. (ID02)")
+    }
+  });
+}
+function fn_inroomInfo_data(data) {
+       $(".col-cnte").css("display","block")
+      $(".top-hdr img").attr("src", data.nusaDua.logo);
+      data = data.nusaDua.indining;
+      $(".inroom-pic .col-5").html(
+        `<span class="" style="font-size: 18px;margin: 0 auto;text-align: center; color:#f1f806; "> <img src="${baseURL + data.qrCode}" alt=""><br> <strong>${data.qrText}</strong></span>`
+      );
+      $(".carousel-caption h4").html(`${data.data_caption}`)
+      let data1 = data.menu_images;
+      let carouselindicators = "";
+      let carouseldata = "";
+      let carouselArrow = "";
+      carouselArrow += `<button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching"
+                        data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#carouselExampleControlsNoTouching"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </button>`;
+      data1.forEach((el, i) => {
+        carouselindicators += `
+                        <li data-target="#carouselExampleControlsNoTouching" data-slide-to="${i}"class="${i == 0 ? "active" : ""}"></li>`;
+                          carouseldata += `
+                        <div class="carousel-item ${i == 0 ? "active" : ""} h-100" data-caption="${el.caption?el.caption:""}">
+                        <div class="d-flex sld-inner align-items-center" data-caption="${el.caption?el.caption:""}">
+                           <img src="${baseURL + el.image}" class="img-fluid pic-height">
+                              <div class="carousel-caption d-none d-md-block text-white">
+                                <h4>${el.text}</h4>
+                              </div>
+                        </div>
+                    </div>
+                      `;
+                      if (i == 0) $(".cption-slde").html(`${el.caption?el.caption:""}`);
+      });
+      document.querySelector(".carousel-inner").insertAdjacentHTML("beforeend", carouseldata);
+      if (data1.length > 1) {
+        document.querySelector(".carousel-indicators").insertAdjacentHTML("beforeend", carouselindicators);
+        document.querySelector(".inroom-pic .carousel-inner").insertAdjacentHTML("afterend", carouselArrow);
+      }
+    }
+
+
+        </script>
+</body>
+
+</html>

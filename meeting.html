@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtyard Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hotel_service.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <script type="text/javascript">
+        window.onerror = function (msg, url, linenumber) {
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(255, 6, 6);z-index:999;">
+        <a href='javascript:void(0);' id='anchor' onkeydown='keyDown();'></a>
+    </div>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr w-100 text-center"> <img src="images/marriot-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                    <div class="col-9 text-center">
+                        <h2 class="text-white mb-0 pl-5 pt-5 cption-slde"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <h5 class="mb-0 w-100"> <strong> Guest Directory</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+                                <div class="col-12 cnt-cl mt-1" data-id="Services"><span
+                                        href="hotel-about.html?fromurl=hotelabt" class="loc-url">About us</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Restaurants">
+                                    <span href="hotel-restaurants.html?fromurl=resturant" class="loc-url">Dining</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Meeting">
+                                    <span href="meeting.html?fromurl=meeting" class="loc-url">Meeting</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="Promo">
+                                    <span href="promotion.html?fromurl=promo" class="loc-url">Promotion</span>
+                                </div>
+
+                                <div class="col-12 cnt-cl mt-2" data-id="westinfamily">
+                                    <span href="westin-family.html?fromurl=westinfamily" class="loc-url">Westin
+                                        Family</span>
+                                </div>
+                                <div class="col-12 cnt-cl mt-2" data-id="arnd-rsrt">
+                                    <span href="around-the-resort.html?fromurl=arnd-rsrt" class="loc-url">Around the
+                                        Resort</span>
+                                </div>
+
+                                <div class="col-12 cnt-cl mt-2" data-id="Home">
+                                    <span href="home.html?fromurl=hotel-srvc" class="loc-url">Home</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-between'>
+                                    <div class="room-no"><strong>Room No: <span class="rm-no"></span>
+                                        </strong></div>
+                                    <div id='date-part'></div>
+                                    <div id='time-part'></div>
+                                    <!-- <img src="images/200x200_Top.svg" class="icon-nav " alt=""> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-9 col-cnte pl-1 desc-conte bg sld-hgt">
+
+                        <!-- <div class="col-head-inr" style="top: 35%;">
+
+                            <h3 class="text-white pl-2 pb-3">Meetings & Events</h3>
+                            <p class="text-white pl-2">Host impressive conferences, trade shows and business/social
+                                events in our modern new venues.</p>
+                        </div> -->
+
+                        <div id="carouselExampleControlsNoTouching"
+                            class="carousel slide carousel-fade r-carousel m-auto" data-pause="false" data-touch="false"
+                            data-interval="100000">
+                            <ol class="carousel-indicators" style="bottom: 90px">
+                                <li data-target="#carouselExampleControlsNoTouching" data-slide-to="0" class="active">
+                                </li>
+                                <li data-target="#carouselExampleControlsNoTouching" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleControlsNoTouching" data-slide-to="2"></li>
+                                <!-- <li data-target="#carouselExampleControlsNoTouching" data-slide-to="3"></li>                                
+                                <li data-target="#carouselExampleControlsNoTouching" data-slide-to="4"></li>                                 -->
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item h-100 servc-sldr active" data-caption="">
+                                    <div class="d-flex sld-inner align-items-center">
+                                        <img src="images/meeting/1-meeting.jpg" class="img-fluid pic-height">
+                                        <div class="carousel-caption d-none d-md-block text-white">
+                                            <h4>The adjacent Bali International Convention Centre (BICC) is the island's
+                                                most comprehensive meeting facility. It features 26,000 square feet of
+                                                meeting space including a ballroom, auditorium and 26 function rooms.
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item h-100 servc-sldr" data-caption="">
+                                    <div class="d-flex sld-inner align-items-center">
+                                        <img src="images/meeting/2-meeting.jpg" class="img-fluid pic-height">
+                                        <div class="carousel-caption d-none d-md-block text-white">
+                                            <!-- <h4>Create the perfect work environment for your Bali conference in one of our 26 indoor meeting rooms </h4> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item h-100 servc-sldr" data-caption="">
+                                    <div class="d-flex sld-inner align-items-center">
+                                        <img src="images/meeting/3-meeting.jpg" class="img-fluid pic-height">
+                                        <div class="carousel-caption d-none d-md-block text-white">
+                                            <!-- <h4>The resort offers a collection of wedding venues, each with its own unique personality and cachet. The white sands of Nusa Dua always manage to win hearts as a venue for tossing a bouquet, with its striking sunrise and soothing sea  breeze. </h4> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="carousel-item h-100 video-slider" data-caption="Westin Meetings" data-video="spa-vid">
+                                    <div class="d-flex sld-inner align-items-center">
+                                        <video id="myVideo" poster="images/video-poster.jpg" loop style="min-width: 100%;height: 470px; background: #28292b;padding: 60px 0px;">
+                                            <source src="video/bicc_westin-meetings.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="carousel-item h-100 video-slider" data-caption="Westin Wedding" data-video="spa-vid2">
+                                    <div class="d-flex sld-inner align-items-center">
+                                        <video id="myVideo2" poster="images/video-poster.jpg" loop style="min-width: 100%;height: 470px; background: #28292b;padding: 60px 0px;">
+                                            <source src="video/westin_wedding.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div> -->
+
+
+                            </div>
+                            <div class="carousel-control">
+                                <button class="carousel-control-prev" type="button"
+                                    data-target="#carouselExampleControlsNoTouching" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-target="#carouselExampleControlsNoTouching" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <script src="js/hotel-service.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            setTimeout(fngetroomfromwebapi, 500);
+            var str_log='Meetings';
+            fnch_logwriter(str_log, guestroomno, 0);
+
+            $('.carousel').carousel({
+                interval: 100000,
+                pause: false,
+                wrap: false
+            }).on('slid.bs.carousel', function () {
+                currentSlide = $('.active');
+                if(currentSlide.is( ':first-child' )) {
+                    $('.carousel-control-prev').fadeOut();
+                return;
+                } else {
+                    $('.carousel-control-prev').fadeIn('fast');	  
+                }
+                if (currentSlide.is( ':last-child' )) {
+                    $('.carousel-control-next').fadeOut();
+                return;
+                } else {
+                    $('.carousel-control-next').fadeIn('fast');  
+                }
+            });
+            var active_caption = $('.carousel-item.active').attr('data-caption');
+            $('.cption-slde').html(active_caption)
+
+            $('.carousel').bind('slid.bs.carousel', function () {
+                var active_caption = $('.carousel-item.active').attr('data-caption');
+                $('.cption-slde').html(active_caption)
+            });
+
+            // console.log(active_caption);
+
+            jQuery(document).bind('keydown', function (e) {
+
+                if (e.keyCode == 39) {
+                    jQuery('button.carousel-control-next').trigger('click');
+                }
+                if (e.keyCode == 37) {
+                    jQuery('button.carousel-control-prev').trigger('click');
+                }
+
+            });
+
+            // $(function () {
+            // $('.carousel').bind('slid.bs.carousel', function () {
+            //     var currentIndex = $('.carousel-item.active').attr('data-video');
+            //     console.log(currentIndex);
+
+            //     if (currentIndex == 'spa-vid') {
+            //         $('#myVideo').get(0).play()
+            //         $('#myVideo2').get(0).pause()
+            //     } 
+            //      if (currentIndex == 'spa-vid2') {
+            //         $('#myVideo2').get(0).play()
+            //         $('#myVideo').get(0).pause()
+            //     }
+            //     // else {
+            //     //    $('#myVideo').get(0).pause()
+
+            //     // }
+
+            //     });
+            // });
+
+        });
+
+
+
+    </script>
+    <script type="text/javascript">
+
+
+        $('.carousel').carousel();
+
+        function bckbtnpressed() {
+            var str_log = 'Meetings back_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "home.html?fromurl=hotel-srvc";
+        }
+        function homepageshowing() {
+            var str_log = 'Meetings home_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "home.html?fromurl=hotel-srvc";
+
+        }
+
+       
+    </script>
+</body>
+
+</html>

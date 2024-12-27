@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="icons/css/all.css">
+  <link rel="stylesheet" href="css/gettvip.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="js/jquery.min.js"></script>  
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+</head>
+<script type="text/javascript">
+  window.onerror = function (msg, url, linenumber) {
+      // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+      // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+  }
+</script>
+<body >
+<div class="clstext" id="logtext"
+  style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(11, 72, 83);z-index:999;">
+</div>
+<div id="preloader" class="preloader">
+  <div class="loader">
+      <div class="loader-inner">
+          <div class="spinner-border text-info" role="status">
+              <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+  </div>
+</div>
+<div id="id_room">
+  <div class="wrapper d-flex vh-100 align-items-center" >
+
+    <div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <div class="brand_logo_container">
+              <img src="images/marriot-logo.png" class="brand_logo" alt="Logo">
+            </div>
+          </div>
+          <div class="d-flex justify-content-center form_container">
+            <div>
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="fa-solid fa-hotel"></i></span>
+                </div>
+                <input type="text" name="uname" class="form-control input_user mt-0" value=""
+                  placeholder="Enter Room Number" required>
+              </div>
+              <div class="d-flex justify-content-center mt-3 login_container">
+                <button  type="submit" name="button" onclick="RoomAdd()" class="btn login_btn">Add Room</button>
+              </div>
+
+            </div>
+          </div>
+          <p id="demo" class="text-center"></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- <div class="container">
+      <label for="uname"><b>Enter Room</b></label>
+      <input type="text" placeholder="" name="uname" required>
+      <button type="submit" onclick="RoomAdd()">Add Room</button>
+      
+    </div> -->
+  <!-- <p id="demo"></p> -->
+</body>
+  <script >
+    document.getElementById("id_room").style.display = "none";
+    $(window).on('load', function () {
+      is_avail();
+      setInterval(is_avail, 5000);
+       // will fade out the white DIV that covers the website. 
+      //$('body').delay(200);
+      var str_log='TV IP Verifier';
+      fnch_logwriter(str_log,0,0);
+    });
+    function RoomAdd() {
+       //document.getElementById("logtext").innerHTML+="<br> cast_handler :"; 
+       var room_number = document.getElementsByName('uname')[0].value;
+        
+      $.ajax({
+        type: "GET",
+        url: "gettvip.php?room=" + room_number+"&is_avail=0",
+        success: function (data) {
+          // alert(data); // apple
+          if (data != '' && data == 'success') {
+            window.location = "index.html";
+          } else {
+            document.getElementById("demo").innerHTML += "<br> Response :" + data;
+          }
+          //return false;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          //console.log(errorThrown);
+          document.getElementById("demo").innerHTML += "<br> Error :" + errorThrown;
+          //return false;
+        },
+        timeout: 5000 // sets timeout to 3 seconds
+      });
+    }
+    function is_avail() {
+      $.ajax({
+        type: "POST",
+        url: "gettvip.php?is_avail=1",
+        success: function (data) {
+          if (data != '' && data == 'exist') {
+            window.location = "index.html";
+          } else {
+            // console.log("guestroomno: " + data);
+            //$("#id_room").css("display", "block");
+            $('#preloader').delay(200).fadeOut(250);
+            document.getElementById("id_room").style.display = "block";
+            document.getElementById("demo").innerHTML = "<br> Response :" + data;
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          //console.log(errorThrown);
+          document.getElementById("demo").innerHTML += "<br> Error :" + errorThrown;
+          //return false;
+        },
+        timeout: 5000 // sets timeout to 3 seconds
+      });
+    }
+  </script>
+
+
+
+</html>

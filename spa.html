@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hotel_service.css">
+    <link rel="stylesheet" href="css/header.css">
+
+
+    <script type="text/javascript">
+        // window.onerror = function (msg, url, linenumber) {
+        //     // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+        //     document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        // }
+    </script>
+</head>
+
+<body>
+
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(255, 6, 6);z-index:999;">
+        <a href='javascript:void(0);' id='anchor' onkeydown='keyDown();'></a>
+    </div>
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt=""> <div class="wrapper-overlay"></div> </div>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader d-none">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr text-center"> <img src="images/marriot-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                    <div class="col-9 text-center">
+                        <h2 class="text-white mb-0 pl-3 pt-5 cption-slde d-none">Spa</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                <h5 class="mb-0 w-100 text-uppercase"> <strong> Spa & Fitness</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+
+                                <div class="col-12 cnt-cl mt-2 act" data-id="home_spa">
+                                    <span href="home.html?fromurl=spa" class="loc-url">Home</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-between'>
+                                    <div class="room-no"><strong>Room No: <span class="rm-no"></span>
+                                        </strong></div>
+                                    <div id='date-part'></div>
+                                    <div id='time-part'></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-cnte pl-1 desc-conte bg sld-hgt" style="display:none">
+
+                        <div id="carouselExampleControlsNoTouching"
+                            class="carousel slide carousel-fade r-carousel m-auto" data-pause="false" data-touch="false" data-interval="100000">
+                            <ol class="carousel-indicators" style="bottom: 90px">
+                                 <!-- Indicators Rendered here -->
+                            </ol>
+                            <div class="carousel-inner">
+                                <!-- right Menu Content Rendered Here -->
+                            </div>
+                            <div class="carousel-control">
+                                <!-- Carousel Contrls Rendered Here -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="nt-avlbl"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <!-- <script src="js/hotel-service.js"></script> -->
+
+    <script type="text/javascript">
+       var guestroomno = "";
+        $(document).ready(function () {
+            get_spainfo_data()
+            setTimeout(fngetroomfromwebapi, 500);
+            guestroomno = queryString("room");
+            fnch_logwriter('Spa', guestroomno, 0);
+
+            $('.carousel').carousel({
+                interval: 100000,
+                pause: false
+            })
+
+            var active_caption = $('.carousel-item.active').attr('data-caption');
+            $('.cption-slde').html(active_caption)
+
+            $('.carousel').bind('slid.bs.carousel', function () {
+                var active_caption = $('.carousel-item.active').attr('data-caption');
+                $('.cption-slde').html(active_caption)
+            });
+
+
+
+            jQuery(document).bind('keydown', function (e) {
+
+                if (e.keyCode == 39) {
+                    jQuery('button.carousel-control-next').trigger('click');
+                }
+                if (e.keyCode == 37) {
+                    jQuery('button.carousel-control-prev').trigger('click');
+                }
+                if (e.keyCode == 10182 || e.keyCode == 10009) {
+                    bckbtnpressed();
+                }
+                if (e.keyCode == 10071) {
+                    homepageshowing();
+                }
+                if (e.keyCode === 13) {
+                    var href = $('.cnt-cl.act .loc-url').attr('href');
+                    // var menu_select = $('.cnt-cl.act').data("id");
+                    if (href.length > 0) {
+                        setTimeout(function () { window.location = (href); }, 100);
+                    }
+                }
+
+            });
+
+            let allVids = $(".carousel").find('.carousel-item');
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        function bckbtnpressed() {
+            fnch_logwriter('Spa back_event', 0, 0);
+            window.location = "home.html?fromurl=spa";
+        }
+        function homepageshowing() {
+            fnch_logwriter('Spa home_event', 0, 0);
+            window.location = "home.html?fromurl=spa";
+
+        }
+    var comn_htl_data=null;
+    function get_spainfo_data(){
+        $.ajax({
+            type: "GET",
+            url: baseURL + "json/WestinNusaDua.json", //LIVE server
+            // url: "downloadfile/MsenseChannelMap.xml",
+            contentType: "application/json",
+            timeout: 5000,
+            dataType: "json",
+            success: function (data) {
+                $(".col-cnte").css("display","block")
+            comn_htl_data=data;
+            fn_spaInfo_data(comn_htl_data);
+            },
+            error: function () {
+                show_msg_guest("Please check network connectivity. (ID02)")
+            }
+        });
+    }
+    function fn_spaInfo_data(data) {
+             $(".top-hdr img").attr("src", data.nusaDua.logo);
+             $(".carousel-caption h4").html(`${data.data_caption}`)
+             let data1 = data.nusaDua.spa.menu_images;
+             let carouselindicators = "";
+             let carouseldata = "";
+             let carouselArrow = "";
+             carouselArrow += `<button class="carousel-control-prev" type="button" data-target="#carouselExampleControlsNoTouching"
+                               data-slide="prev">
+                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                               <span class="sr-only">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-target="#carouselExampleControlsNoTouching"
+                               data-slide="next">
+                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                               <span class="sr-only">Next</span>
+                           </button>`;
+             data1.forEach((el, i) => {
+               carouselindicators += `
+                               <li data-target="#carouselExampleControlsNoTouching" data-slide-to="${i}"class="${i == 0 ? "active" : ""}"></li>`;
+                carouseldata += `
+                                <div class="carousel-item h-100 servc-sldr ${i == 0 ? "active" : ""}"
+                                         data-caption="${el.caption?el.caption:""}">
+                                         <div class="d-flex sld-inner align-items-center">
+                                             <img src="${baseURL+el.image}" class="img-fluid pic-height">
+                                             <div class="carousel-caption d-md-block text-white ${el.text?"":"invisible"}">
+                                                 <h4>${el.text?el.text:""}</h4>
+                                             </div>
+                                         </div>
+                                     </div>
+                             `;
+                             if (i == 0) $(".cption-slde").html(`${el.caption?el.caption:""}`);
+             });
+             document.querySelector(".carousel-inner").insertAdjacentHTML("beforeend", carouseldata);
+             if (data1.length > 1) {
+               document.querySelector(".carousel-indicators").insertAdjacentHTML("beforeend", carouselindicators);
+               document.querySelector(".carousel-control").insertAdjacentHTML("afterend", carouselArrow);
+             }
+           }
+
+    </script>
+</body>
+
+</html>

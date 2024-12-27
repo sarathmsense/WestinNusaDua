@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuSa Dua</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
+    <link href="css/tvcss/TV_key_css.css" rel="stylesheet" type="text/css" />
+    <link href="css/tvcss/TVbottombanner.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/tv-chnl.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/skelton.css">
+    <script type="text/javascript" src="js/tvjs/jquery-1.9.1.min.js"></script>
+    <script type='text/javascript' src="$B2BAPIS/b2bapis/b2bapis.js"></script>
+    <script type="text/javascript" src="$WEBAPIS/webapis/webapis.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <!-- TV channel playing -->    
+    <script src="js/tvjs/TV_key_handler.js" type="text/javascript"></script>
+    <script src="js/tvjs/Js_ch_list.js" type="text/javascript"></script>
+    <script src="js/tvjs/TV_key_updown_leftright.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/tvjs/RF_tuner.js"></script>
+    <script type="text/javascript" src="js/SamsungKeyReg.js"></script>
+    <script src="js/time.js"></script>
+    <script type="text/javascript">
+        // alert('aaa')
+        window.onerror = function (msg, url, linenumber) {
+            // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+    
+</head>
+
+<body onload="init();"> 
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(245, 18, 41);z-index:999;">
+
+    </div>
+    <div id="tv_channel_playing_area">
+       
+        <div id="msg"> </div>
+        <div id="spkmsg"></div>
+    
+        <!-- <div id="logodisp"><img src="images/tvlogo.png"   alt="" /></div> -->
+        <div class="logo_detail">
+            <!-- <img src="images/tvlogo.png"> -->
+        </div>
+    
+        <div class="channelnamenumber">
+    
+            <div>
+                <div class="name">
+                    <span id="id_sp_chname"></span>
+                </div>
+    
+                <div class="cls_ch_category">
+                    <span id="id_sp_chcategory"></span>
+                </div>
+    
+            </div>
+    
+        </div>
+        <div class="cls_vertical_divider"><span></span></div>
+        <div class="cls_ch_number">
+            <span id="id_sp_chnumber"></span>
+        </div>
+    
+    
+        <div class="flipbox-container">
+            <div class="bg2">
+                <div class="flipbox">
+                    <span id="">&nbsp;</span>
+                </div>
+                <div class="flipboxContent flipbox_Entertainment" accesskey="2">
+                    <h1 class="lbl_name">Categories</h1>
+                    <ul id="id_category_ul" class="class_category_ul">
+    
+                    </ul>
+                </div>
+    
+                <nav id="navigation" style="color: #fff;">
+                    <div>
+                        <img src="images/arrow_next.png" /> Hide
+                    </div>
+                    <div class="msg_btn">
+                        <img src="images/move.png" /> Move
+                    </div>
+                    <div>
+                        <img src="images/enter.png" /> Select
+                    </div>
+    
+                </nav>
+    
+            </div>
+        </div>
+        <div class="sorting-container">
+            <div class="bg2">
+                <div class="flipbox">
+                    <span id="">&nbsp;</span>
+                </div>
+                <div class="sortingContent sorting_Entertainment" accesskey="3">
+                    <h1 class="lbl_name">Sorting</h1>
+                    <ul id="id_sorting_ul" class="class_sorting_ul">
+    
+                    </ul>
+                </div>
+    
+            </div>
+        </div>
+        <div class="content_right">
+    
+            <!-- <div id="lbl_msg"  style="position:absolute; top:0; left:0; font-size:16px;"></div> -->
+            <div class="bg2">
+                <div class="chnl_list_nav">
+                    <!--     <h1>
+                        <img src="images/arrow_left.png" width="16" height="21">Sorting
+                    </h1>
+                -->
+                    <h2 id="all_list">
+                        ALL CHANNELS</h2>
+                    <!--      <h3>
+                        Categories
+                        <img src="images/arrow_right.png" width="16" height="21"></h3>
+            -->
+                </div>
+                <div class="nav_top">
+                    <img src="images/arrow_top.png" alt="">
+                </div>
+                <ul class="class_chnl_list" id="id_chnl_list" accesskey="1" compact="compact">
+    
+                </ul>
+                <div class="nav_bottom">
+                    <img src="images/arrow_bottom.png" alt="">
+                </div>
+                <nav id="navigation" style="color: #fff;">
+                    <!-- <div>
+                        <img src="images/arrow_next.png" /> Categories
+                    </div> -->
+                    <div class="msg_btn">
+                        <img src="images/move.png" /> Move
+                    </div>
+                    <div>
+                        <img src="images/enter.png" /> Select
+                    </div>
+                    <div class="exit_btn">
+                        <img src="images/close.png" /> Close
+                    </div>
+                </nav>
+    
+    
+            </div>
+        </div>
+    
+        <div class="bottom_pannel" style="table-layout:fixed; height:58px !important;">
+    
+    
+    
+            <div class="bottom_pannel_right">
+                <div class="btn"> <img src="images/chnl_btn.png" /> </div>
+                <div class="footer_nav_text"> for Channel List </div>
+                <div class="btn"> <img src="images/home_btn.png" /> </div>
+                <div class="footer_nav_text"> for Home screen </div>
+                <!--	<div class="btn"> <img src="images/chnl_up_down.png" /> </div>
+                <div class="footer_nav_text">Change Channel</div>   -->
+    
+            </div>
+    
+    
+        </div>
+    
+        <!--	<p>Click</p>  -->
+    
+    </div>
+    <div id="tv_channel_list_area">
+        <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt="">
+            <div class="wrapper-overlay"></div>
+        </div>
+        <!-- Preloader -->
+        <div id="preloader" class="preloader d-none">
+            <div class="loader">
+                <div class="loader-inner">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="wrapper">
+            <div class="menu-cover"></div>
+
+            <div class="header row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="top-hdr"> <img src="images/marriot-logo.png" alt="" class="logo"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row main">
+                
+                <div class="container">
+                    <div class="row position-relative pb-3">
+                        <div class="remote_icons d-flex" style="right: -45px;">
+                            <div class="nav-info">
+                                <img src="images/navigations/nav-arrow.png" alt=""> Channel navigation
+                            </div>
+                        </div>
+                        <div class="col-4 col-menu text-white">
+                            <div class="w-100 d-inline-block main-sec-menu">
+                                <div class="greet-msg w-100 d-flex text-center align-items-center justify-content-center">
+                                    <h5 class="mb-0 w-100 text-uppercase"> <strong>Watch TV</strong></h5>
+                                </div>
+                                <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+                                    
+                                </div>
+    
+                            </div>
+                            <div class="date-time w-100 d-inline-block">
+                                <div class="day-time">
+                                    <div class='time-frame cnt-txt d-flex justify-content-center'>
+                                        <div id='date-part'></div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <ul class="o-vertical-spacing o-vertical-spacing--l skelton-main">
+                            <li class="blog-post o-media">
+                              <div class="o-media__figure">
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>
+                                <span class="skeleton-box" style="width:100px;height:80px;"></span>                                
+                              </div>                              
+                            </li>                            
+                          </ul>
+                        <div class="col-12 chnl-sec">                        
+                            
+                            <div class="arw-scrl" id="channel-arrows">
+                                <!-- <span class="arw-up"><img src="images/arrow_up.png" alt=""></span>
+                                <span class="arw-dwn act"><img src="images/arrow_bottom.png" alt=""></span> -->
+                            </div>
+                          
+                        </div>
+                        <div class="component-loader d-none"><img src="images/channel-loader.gif" alt=""></div>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="nt-avlbl" id="logtext"></div>
+           
+        </div>
+    </div>
+    <a href="javascript:void(0);" id="tvchannel_Anchor" onkeydown="tv_channels.KeyHandler(event);"></a>
+    <a href="javascript:void(0);" id="tv_Anchor" onkeydown="tv_play.KeyHandler(event);"></a>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>   
+    <script src="js/tvch_handler.js"></script> 
+    <script src="js/tv-script.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <script type="text/javascript">
+         var irkitip = '0';
+        var LGTVRoom = 0;
+        var guestroomno = 0;
+        var htmlsourcestatus=0;    
+        $(document).ready(function () {     
+            setTimeout(api_login, 1000);     
+            $('.cont-list').equalHeights();
+            setTimeout(fn_load_ulemnt, 2000);         
+            setTimeout(fngetroomfromwebapi, 1000); 
+            guestroomno = queryString("room");          
+            setTimeout(function(){load_ch_from_xml();}, 1000);       
+            $('#tvchannel_Anchor').focus();	
+            setTimeout(registerKey, 1000);
+            $(".cls_vertical_divider").hide();
+            $("#tv_channel_playing_area").hide();
+            fnch_logwriter('Tvchannels', guestroomno, 0);
+        });
+
+        function bckbtnpressed() {
+            if (htmlsourcestatus == 1) {
+                htmlsourcestatus=0;
+            }
+            else {
+                window.location = "home.html?fromurl=tvchnl";
+            }
+        }
+        function homepageshowing() {
+            var str_log='Tvchannels home_event';
+            fnch_logwriter(str_log,0,0);
+            htmlsourcestatus = 0;
+            setTimeout(function () { window.location = "home.html?fromurl=tvchnl"; }, 2000);
+        }
+        function setState(argstatus) {
+            htmlsourcestatus = argstatus;
+        }
+        function YouTubebtnpressed() {
+            // console.log("htmlsourcestatus " + htmlsourcestatus);          
+        }
+        function Netflixbtnpressed() {
+            console.log("htmlsourcestatus " + htmlsourcestatus);          
+        }
+function load_ch_from_xml() {
+  
+    $.ajax({
+        type: "GET",
+        url: "http://" + middleware_ip + "/"+Projctfldr+"/downloadfile/MsenseChannelMap-new.xml",
+        timeout: 5000,
+        dataType: "xml",
+        success: function (xml) {           
+            $(xml).find('Stream-Mandatory-Data').each(function (index, element) {
+                
+                var channelName = $(this).find('Channel-Name').text().trim();
+                var channelNumber = $(this).find('Channel-Number').text().trim();
+                var channelcategory = $(this).find('Channel-Category').text().trim();
+                var channelip = $(this).find('Channel-IP').text().trim();
+                var chport = $(this).find('Channel-Port').text().trim();
+                var chMjrno = $(this).find('Channel-MajorNo').text().trim();
+                
+                arr_listofchannels[index] = [];
+                
+                arr_listofchannels[index].push(channelNumber);
+                arr_listofchannels[index].push(channelName);
+                arr_listofchannels[index].push(channelcategory);
+                arr_listofchannels[index].push(channelip);
+                arr_listofchannels[index].push(chport);
+                arr_listofchannels[index].push(chMjrno);
+            
+            });
+                totalnoofchannel=arr_listofchannels.length;
+        },
+        error: function () {
+            // alert("An error occurred while processing XML file.");
+            show_msg_guest('Channel not loaded. Please check WiFi connection ID05');           
+        }
+    });
+}
+
+    </script>
+
+</body>
+
+</html>

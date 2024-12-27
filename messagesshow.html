@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courtyard Marriot</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/hotel_service.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="icons/css/all.css">
+    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/page_loader.js"></script> -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="js/app.js"></script> -->
+    <script src="js/moment.js"></script>
+    <script src="js/time.js"></script>
+    <script src="js/guest_service_msg.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <script type="text/javascript">
+        window.onerror = function (msg, url, linenumber) {
+            // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="overlay-panel"><img src="images/dpswi-bg.jpg" alt=""> <div class="wrapper-overlay"></div> </div>
+    <!-- Preloader -->
+    <div id="preloader d-none">
+        <div id="status" style="text-align: center;">
+            <div class="loader4"></div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="menu-cover"></div>
+        <div class="header row">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 logo-col">
+                        <div class="top-hdr text-center"> <img src="images/marriot-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                    <div class="col-8 text-center">
+                        <!-- <h2 class="text-white mb-0 pl-5 pt-5">About Us</h2> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-menu text-white">
+                        <div class="w-100 d-inline-block main-sec-menu">
+                            <div class="greet-msg w-100 d-flex text-center align-items-center">
+                                <h5 class="mb-0 w-100 text-uppercase"> <strong> Messages</strong></h5>
+                            </div>
+                            <div class="menu-sec cnt-col d-flex text-center flex-wrap">
+                                <div class="col-12 cnt-cl act mt-2" data-id="Home"><span
+                                        href="home.html?fromurl=greet-msg" class="loc-url text-uppercase">Home</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="date-time w-100 d-inline-block">
+                            <div class="day-time">
+                                <div class='time-frame cnt-txt d-flex justify-content-center'>
+                                    <!-- <div class="room-no"><strong>Room No: <span class="rm-no"></span>
+                                        </strong></div> -->
+                                    <div id='date-part'></div>
+                                    <!-- <div id='time-part'></div> -->
+                                    <!-- <img src="images/200x200_Top.svg" class="icon-nav " alt=""> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 col-cnte pl-2 desc-conte bg sld-hgt">
+                        <div class="no-msg" id="no-msg">
+                            <h2>No Messages to display</h2>
+                        </div>
+
+                        <!-- <div id="carousel-fade" class="carousel carousel-fade m-auto msg-crosl" data-ride="carousel" data-interval="1000">
+                            <div class="carousel-inner embed-responsive embed-responsive-16by9 restrnt h-auto" role="listbox"> -->
+                                <div id="message-list"></div>
+                            <!-- </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <a href="javascript:void(0);" id="shwmsg_Anchor" onkeydown="showmsg_keyevents.KeyHandler(event);"></a>
+
+
+     
+    <script type="text/javascript">
+        $('#no-msg').hide();
+       
+        $(document).ready(function () {
+            $(document).on('keydown', function(e) {
+                message_keyevents.KeyHandler(e);
+            });
+            // fngetroomfromwebapi();
+            setTimeout(fngetroomfromwebapi, 200);
+            guestroomno = queryString("room");
+            var get_msgid = queryString("id");
+            show_Message(get_msgid);
+            var str_log = 'Messages-show page: loaded';
+            fnch_logwriter(str_log, guestroomno, 0);
+        });
+
+        $('.carousel').carousel();
+
+        function bckbtnpressed() {
+            var str_log = 'Messages back_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "messages.html";
+        }
+        function homepageshowing() {
+            var str_log = 'Messages home_event';
+            fnch_logwriter(str_log, 0, 0);
+            window.location = "home.html?fromurl=greet-msg";
+
+        }
+
+   </script>
+</body>
+
+</html>

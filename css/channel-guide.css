@@ -1,0 +1,68 @@
+
+
+*{margin:0;padding:0;outline:none;text-decoration:none;border:none;list-style:none}
+.cf:after,.cf:before{content:'';display:block}
+.cf:after{clear:both}
+.cf{zoom:1;clear:both}
+img,img:focus{border:none;outline:0}
+img{max-width:100%;height:auto}
+form{margin:0;padding:0;border:0}
+a{color:#181818;text-decoration:none;outline:none}
+a:hover{text-decoration:none}
+body,html{width:100%;outline:0}
+body{height:100%;overflow-y:hidden;overflow-x:hidden;padding:0;margin:0;color:#212121;font-size:1em;font-weight:400;background:url(../images/image-bnr.png) no-repeat left center;background-size:cover;-moz-font-smoothing:antialiased;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;-moz-osx-font-smoothing:grayscale;min-width:320px;font-family:"Lato",sans-serif;position:relative;overflow-y:hidden}
+.container{max-width:1920px;width:96%;padding-left:0;padding-right:0}
+.wrapper{width:100%;display:inline-block;height:100vh;overflow:hidden;}
+header,footer{width:100%}
+@font-face{font-family:"'Open Sans', sans-serif";src:url(../fonts/OpenSans-Regular.ttf)}
+@media only screen {
+.logo{ max-width: 125px; padding-top: 20px;}
+.wrapper{height:100vh;overflow:hidden}
+.main{ padding-top: 50px;}
+.col-menu{ max-width: 315px;}
+.greet-msg{ padding: 60px 10px; font-size: 17px;font-weight: 600;line-height: 23px; background: #302A2A;}
+.main-sec-menu{ background: #423C3C; }
+.menu-sec{ padding-left: 12px; padding-right: 12px; padding-top: 2em; padding-bottom: 2em; height: 304px;overflow: scroll;}
+.cnt-cl{ font-weight: 600; }
+.cnt-cl::after{padding-top: 3px; display:block;content: '';border-bottom: 5px solid transparent; transform: scaleX(0);transition: transform 250ms ease-in-out;}
+.cnt-cl.act::after{ border-bottom: 5px solid #E9B233; transform: scaleX(1);}
+.cnt-cl.act{ font-weight: 700;}
+.col-cnte{ height: 480px;overflow: hidden;max-width: 80%;flex: 0 0 75.3%; position: relative;}
+#slider { width: 100%; position: relative; margin: auto;}
+#slider img {width: 100%;}
+#slider .caption{ position: absolute;z-index: 1;left: 0;width: 100%;text-align: center; bottom: 0; background: rgba(255, 255, 255, .5); padding: 10px 0; color: #000; font-weight: 700;}
+.photo {position: absolute;width: 100%;display: none;}
+.photo img{ height:470px; width: 100%;}
+.col-cnte .photo-pic img{ height:470px; width: 100%;}
+.desc-conte{ }
+.desc-conte .col-pic{ width: 75%;}
+.desc-conte .col-pic .photo-pic img{ height: 446px;}
+.messages-contain { height: 472px;}
+.greet-icn img { max-width: 140px;}
+
+/* messages */
+.messages-contain{ height: 544px;}
+.greet-msg-cnt{ display: inline-block; width: 100%;height: 538px; background: rgba(61, 61, 61, 0.7);}
+.greet-icn img{ max-width: 140px; }
+.message-header{ background: #302a2a; vertical-align: middle; box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75);
+-webkit-box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75);-moz-box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75);}
+.pic-head{ display: inline-block; max-width: 40px;}
+.message-header .text-head{ display: inline-block;padding-left: .4em;font-size: 24px;font-weight: 700}
+.message-main-sec{ width: 100%; display: inline-block; padding: 1em;}
+.message-main-sec li{ background: rgba(255, 255, 255, .4); color: #fff; border-radius: 20px; padding: .65em 1em; margin-bottom: 1em; box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75);-webkit-box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75);-moz-box-shadow: -1px 3px 5px 0px rgba(147,139,139,0.75); height: 125px;}
+/* .message-main-sec li:nth-child(odd){  background: #e9ffec} */
+.message-main-sec li .msg-id{display: none;}
+.message-main-sec li .msg-txt{ display: inline-block; width: 75%; vertical-align: middle; line-height: 1.2em;}
+.message-main-sec li .msg-time{ display: inline-block; width: 24%; text-align: right; vertical-align: middle;}
+.message-main-sec li .msg-img img{ max-width: 26px; margin-top: 5px; -webkit-filter: invert(100%);filter: invert(100%);}
+#messageContainer p{ margin-bottom: .2em;}
+.message-pnl .nav-info{ position: absolute; right: 0; bottom: -3px; color: #fff;}
+.message-pnl .nav-info img{ max-width: 40px;}
+#message-list .servc-sldr{ background: rgba(48, 42, 42, .7);}
+#message-list .sld-inner img{ object-fit: cover;}
+/* messages end */
+}
+@media only screen and (max-width: 1920px) {
+
+.col-cnte{ height: auto;}
+}

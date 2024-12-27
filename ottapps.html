@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT apps</title>    
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ott-animation.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/time.js"></script>
+    <script type="text/javascript" src="$WEBAPIS/webapis/webapis.js"></script>
+    <script type="text/javascript" src="js/tizen_hdmi1.js"></script>
+    <script type="text/javascript" src="js/SamsungKeyReg.js"></script>
+    <script type="text/javascript" src="js/tvurl_capture_query.js"></script>
+    <script type="text/javascript">
+        window.onerror = function (msg, url, linenumber) {
+            // console.log("Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber);
+            // document.getElementById("logtext").innerHTML += "<br> Error message: " + msg + "\nURL: " + url + "\nLine Number: " + linenumber;
+        }
+    </script>
+<style>
+    body{ background: var(--main-white-color); height: 100vh;}
+    .preloader {align-items: center;background: #FFF;display: flex;height: 100vh;justify-content: center;left: 0;position: fixed;top: 0;  transition: opacity 0.2s linear; width: 100%;z-index: 9999; opacity: 1; transform: opacity 1s linear;}
+    .overlay-panel{ position: fixed;width: 100%;height: 100vh; top: 0;}
+    .overlay-panel img{ width: 100%;}
+    .loading{align-items:center;display:flex;justify-content:center;height:100%;position:fixed;width:100%; color: #fff;}
+    .loading__dot{animation:dot ease-in-out 1s infinite;background-color:grey;display:inline-block;height:6px;margin:10px 4px;width:6px; border-radius: 50px; top: 3px;position: relative; left: -4px;}
+    .loading__dot:nth-of-type(2){animation-delay:.2s}
+    .loading__dot:nth-of-type(3){animation-delay:.3s}
+        @keyframes dot {
+        0%{background-color:#fff;transform:scale(1)}
+        50%{background-color:#fff;transform:scale(1.3)}
+        100%{background-color:#fff;transform:scale(1)}
+        }
+    .footer{ position: fixed; bottom: 10px;right: 0;text-align: right; padding-right: .75em;}  
+    .loading img{max-width:25px; filter: contrast(1000%) invert(100%) sepia(100%) saturate(10000%) hue-rotate(90deg);}  
+    .nt-avlbl{ position: absolute;background: rgba(0, 0, 0, .8);height: auto;width: 570px; bottom: 100px; color: #fff;font-size: 18px;left: 33%;z-index: 100;display: flex;align-items: center; justify-content: center;border: 1px solid #ccc; opacity: 0; padding: 12px 20px;}
+    .nt-avlbl.active{ opacity: 1;}
+    #msg{ font-weight: 600;font-size: 40px; color: #000;text-shadow: 1px 1px 2px black, 0 0 1em #000013, 0 0 0.2em #020204;}  
+    </style>
+<body class="position-relative">
+    <div class="wrapper vh-100 position-relative">
+
+        <div class="page-header">
+
+        </div>
+    <!-- <div class="overlay-panel"><img src="images/image-bnr.jpg" alt=""></div> -->
+    <div class="clstext" id="logtext"
+        style="position: absolute;top: 0%;left: 0%;display: inline-block;color:rgb(13, 69, 18);z-index:999;">
+       
+    </div>
+    
+    <div class="loading">
+        <!-- <h2 id="msg">Press home (<img src="images/ottapps/home_white.png" alt="">) / exit (<img src="images/ottapps/exit-button.png" alt="">) button to return back &nbsp;</h2> -->
+         <!-- <span class="loading__dot"></span> -->
+         <!-- <span class="loading__dot"></span>
+         <span class="loading__dot"></span> -->
+     </div>
+     <div class="footer w-100">
+        <!-- <img src="images/home_btn.png" alt=""> <h6 class="text-white d-inline-block ml-2"><strong>Press Home</strong></h6> -->
+     </div>
+     <div class="nt-avlbl"></div>
+    </div>
+</body>
+
+
+    <script type="text/javascript">
+         window.addEventListener("load", () => {
+            document.querySelector("body").classList.add("loaded");
+        });
+    var hdmi = 0;
+    var ottip = '0';
+    var LGTVRoom = 0;
+    var flag_source_chnge_scess=0;
+    var num_counter=1;
+    var flag_called_fn=0;
+    var con_failed=1;
+    var str_appid='';
+    $(document).ready(function () {
+        str_appid = queryString("appid");  
+        setTimeout(function () {
+            flag_called_fn=1;
+            if (str_appid!=false && str_appid!='' && str_appid=='vplus')
+                ottevents(551122); // Call Vision+ app
+            else
+                ottevents(2211);
+        }, 500);        
+        setTimeout(registerKey, 1000);
+        fngetOTTipfromwebapi();     
+        const src_chk_Interval = setInterval(Source_chnge_checker, 1000);
+        function Source_chnge_checker() {
+            if (flag_called_fn==1){
+                flag_called_fn=1;
+                if (str_appid!=false && str_appid!='' && str_appid=='vplus')
+                    ottevents(551122); // Call Vision+ app
+                else
+                    ottevents(2211);
+            }
+            if (flag_source_chnge_scess==0 && num_counter>2){
+                launchSource("HDMI"); 
+            }else if (flag_source_chnge_scess==1){
+                Stop_source_chnge_checker(); 
+            }
+            num_counter++;
+            // if (num_counter>10){
+            //     $("#msg").text("Unable to connect WiFi, press home on remote");
+            //     Stop_source_chnge_checker();
+            // }          
+        }
+        function Stop_source_chnge_checker() {
+            clearInterval(src_chk_Interval);
+        }
+        if (str_appid!=false && str_appid!='' && str_appid=='vplus')
+            setTimeout(function(){fnch_logwriter('VisionPlus', guestroomno, 0)}, 1000); // Call Vision+ app
+        else
+            setTimeout(function(){fnch_logwriter('OTTAPPS', guestroomno, 0)}, 1000); // Call Vision+ app         
+    });
+   
+    $(document).on('keydown', function (e) {
+        var keyCode = e.keyCode
+        ottevents(keyCode);
+        if (keyCode == 10182) { // Tizen Exit
+            $('#msg').hide();
+            handleBack();
+            setTimeout(function () {     
+            if (str_appid!=false && str_appid!='' && str_appid=='vplus')
+                window.location = "home.html?fromurl=vplus";
+            else
+                window.location = "home.html?fromurl=scrn_cast";
+            }, 1000);
+        }
+        if (keyCode == 10071) { //Tizen Home
+            $('#msg').hide();
+            handleBack();
+            setTimeout(function () {                  
+            if (str_appid!=false && str_appid!='' && str_appid=='vplus')
+                window.location = "home.html?fromurl=vplus";
+            else
+                window.location = "home.html?fromurl=scrn_cast";
+            }, 1000);
+        }
+        // if (keyCode == 10009) { //Tizen Return
+        // }
+
+    });
+    function fngetOTTipfromwebapi() {
+        $.ajax({
+            type: "POST",
+            url: "http://"+middleware_ip+"/"+Projctfldr+"/apigetOTTip.php",
+            success: function (data) {
+                // alert(data); // apple
+                if (data != '') {
+                    var stringsplit = data.split(" ")
+                    LGTVRoom = stringsplit[0];
+                    ottip = stringsplit[1];
+                    // document.getElementById("logtext").innerHTML += "guestroomno: "+LGTVRoom+" ip: "+ottip;                    
+                } else {
+                }
+            }
+        });
+    }
+    function ottevents(eventkeys) {
+        // document.getElementById("logtext").innerHTML+="<br> cmd :"+eventkeys;
+        $.ajax({
+            type: "GET",
+            url: "http://"+middleware_ip+"/"+Projctfldr+"/ott_events.php?key_event=" + eventkeys+"&ottip="+ottip+"&roomno="+LGTVRoom,
+            success: function (data) {
+                flag_called_fn=0;
+                // document.getElementById("logtext").innerHTML += "data : "+data+" eventkeys "+eventkeys;
+                if (data.indexOf('Failed') !== -1) {
+                    con_failed=1;
+                } else {
+                    con_failed=0;
+                }
+                
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                // document.getElementById("logtext").innerHTML+="<br> Error :"+errorThrown;
+                //return false;
+            },
+            timeout: 3000 // sets timeout to 3 seconds
+        });
+    }
+
+  
+    </script>
+</html>

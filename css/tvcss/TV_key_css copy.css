@@ -1,0 +1,280 @@
+﻿html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+caption, tbody, tfoot, thead,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ 
+a{ font:11px verdana; color:#813034;  text-decoration:underline; cursor:hand; cursor:pointer;  
+   outline:none; border:none;}
+
+a:hover{ font:11px verdana; color:#ffef00;  text-decoration:underline;outline:none;border:none;
+          -webkit-appearance:none;}
+
+img{ border:none;}
+
+html{height:100%; overflow-x:hidden;}
+
+/*body {line-height: 1;  font:62.5% Verdana, Arial, Helvetica, sans-serif; height:100%;  background:#272727; } */
+body {line-height: 1;  font:62.5% Verdana, Arial, Helvetica, sans-serif; height:100%; height: 100vh; position: relative; overflow: hidden; }
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img{ max-width:100%; border:none;}
+
+html{ height:100%;}
+
+
+.chnl_list_nav{ color:#fff; height:2em; margin-top:1em; text-align:left; 
+                font-size:1.9em; margin-bottom:0em; border:solid 0px red;}
+
+.chnl_list_nav img{ vertical-align:middle; margin-left:0em;}
+
+.chnl_list_nav h1{ display:inline-block; width:6em; border:solid 0px red;}
+
+.chnl_list_nav h1 img{ margin-right:.5em;}
+  
+#all_list{ text-align:center; font-family:ralewaybold; 
+           margin-left:1.5em; font-size:1.2em;border:solid 0px red;}
+
+.chnl_list_nav h3{display:inline-block; width:7em; border:solid 0px red; text-align:right;}
+
+
+.lbl_name{font-family:ralewaybold; font-size:2.2em; margin-left:2em; margin-top:1em; color:#3af8ff; }
+
+ .flipbox-container{
+     position:absolute; top:0%; width:340px;  right:10px;     
+       float:right; opacity:0; z-index:2000;
+       background-attachment: scroll;
+	   background: #000000; border:solid 1px #4c4c4c; 
+  }  
+         
+ .flipbox-container .bg2{ height:500px;}
+     
+ .flipbox{  
+	width:100%; position:absolute; top:0px;  	 
+	  border:solid 0px blue;
+ } 
+	
+ /* sub Channel */
+
+ .logo_detail img{max-width:150px;background:#fff;border-radius:2px}
+	
+.flipbox-container .flipboxContent{  border:solid 0px blue; opacity:1; position:absolute; top:0px; color:#fff; border:solid 0px red;}
+	
+.flipbox-container .flipboxContent ul{margin-left:20px; margin-right:10px; margin-top:20px;}
+	
+.flipbox-container .flipboxContent ul li{  padding:12px; list-style:none; font-size:22px; font-family: 'ralewaysemibold';    }
+
+.flipbox-container .flipboxContent ul li .sub_serial{ width:50px; float:left;  border:solid 0px red; line-height:1em;
+                                                       text-align:center; font-size:1.5em;   }
+
+.flipbox-container .flipboxContent ul li .sub_chnl{ width:220px; float:left; border:solid 0px red;}
+
+.flipbox-container .flipboxContent ul li .sub_chnl br { clear:both;} 
+
+.flipbox-container .flipboxContent ul li.sub_highlight{ border: 3px solid #fff; background-color:#082437; 
+ -webkit-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+-moz-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+    color: #FFFFFF;position: relative;  }
+	
+/* Sorting container */
+
+.sorting-container{
+     position:absolute; top:0%; width:340px;  right:10px;     
+       float:right; opacity:0; z-index:2000;
+       background-attachment: scroll;
+	   background: #272727; border:solid 1px #4c4c4c; 
+  }  
+         
+ .sorting-container .bg2{ height:500px;}
+     
+ .flipbox{  
+	width:100%; position:absolute; top:0px;  	 
+	  border:solid 0px blue;
+ } 
+	
+.sorting-container .sortingContent{  border:solid 0px blue; opacity:1; position:absolute; top:0px; color:#fff; border:solid 0px red;}
+	
+.sorting-container .sortingContent ul{margin-left:20px; margin-right:10px; margin-top:20px;}
+	
+.sorting-container .sortingContent ul li{  padding:12px; list-style:none; font-size:22px; font-family: 'ralewaysemibold';    }
+
+.sorting-container .sortingContent ul li .sub_serial{ width:50px; float:left;  border:solid 0px red; line-height:1em;
+                                                       text-align:center; font-size:1.5em;   }
+
+.sorting-container .sortingContent ul li .sub_chnl{ width:220px; float:left; border:solid 0px red;}
+
+.sorting-container .sortingContent ul li .sub_chnl br { clear:both;} 
+
+.sorting-container .sortingContent ul li.sub_highlight{ border: 3px solid #fff; background-color:#082437; 
+ -webkit-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+-moz-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+    color: #FFFFFF;position: relative;  }	
+     
+ /* Content right  background:#272727;*/ 
+    
+.content_right{
+	float:right;
+	width:420px;
+	border:solid 1px transparent;
+	top:0%;  
+	position:absolute;
+	right:-430px; /*right:-55%; */ 
+	opacity:0; z-index:1000;font-family: 'ralewaysemibold';
+	background-attachment: scroll;	
+	background-repeat: repeat;
+	background-position: left top; border:solid 0px red;
+	background:#000000;
+}
+
+.content_right p{ margin-top:1em; font-size:1.5em; color:#fff; width:80%;
+ line-height:1.4em;}
+
+.content_right p span{  display:block; font-size:1.6em; margin-bottom:.5em; width:10em;}
+
+.content_right p span img{ width:5%;}
+ 
+.content_right .chnl_list div.txt_hover{ color:#fbff93;}
+
+.content_right .class_chnl_list{  
+  position: relative;  border:solid 0px red;  margin:0 auto; margin:10px; width:90%;} 
+
+.content_right .class_chnl_list li{ margin-top:.6em; margin-bottom:.6em;}
+
+ 
+.content_right .class_chnl_list div{  color:#fff; min-width:.1em; display:inline;  float:left;
+ font-size:21px;}/*   */
+
+.content_right .serail_no , .content_right .chnl_name{margin-bottom:.5em;  margin-top:.5em;}
+                                
+.content_right .highlight2{ border: 0.3em solid #fff; background-color:#082437; 
+                            -webkit-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+-moz-box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+box-shadow: 0px 2px 10px 7px rgba(10,237,240,1);
+
+     color: #FFFFFF;position: relative;   }
+    
+.content_right .class_chnl_list br { clear:both; }
+
+	
+	.serail_no{ width:5em; color:#fff; text-align:center; border-right:solid 2px #CCC;}
+
+.chnl_name{ width:9em; color:#fff; background:url(images/arrow_left2.png) no-repeat left center; padding-left:1.5em;  }
+
+.nav_top , .nav_bottom{ text-align:center; display:none; margin-top:2em;}
+
+
+/* Lebel message and logo;*/ 
+
+#logodisp {position: absolute;  bottom: 10px; right:20px;}
+#logodisp img{opacity:.5;}
+#msg {position: absolute; margin-top: 300px; margin-bottom: 300px; margin-right: 400px; margin-left: 400px; font-size:40px; color:white;}
+#spkmsg {color: #00FF00;}
+
+/* channel number and channel Name   font-size:40px;*/
+
+.channelnamenumber{
+    width:200px;    
+    margin:auto;
+    z-index:1;
+    position:absolute;
+    right:140px;
+	top:45%;
+    margin-right:100px; /* half the width to obtain proper offset */
+	
+	
+}
+
+.channelnamenumber .name { text-align:right; font-size:22px;color:#007FFF;}
+.channelnamenumber .cls_ch_category { text-align:right; font-size:22px; margin-top: 10px; color:#007FFF;}
+
+
+.cls_ch_number{
+    width:50px;    
+    margin:auto;
+    z-index:1;
+    position:absolute;
+    right:30px;
+	top:45%;
+    margin-right:100px; /* half the width to obtain proper offset */
+	font-size:45px;
+	color:#FFF;
+	
+}
+
+.cls_vertical_divider {
+    width:10px;    
+    margin:auto;
+    z-index:1;
+    position:absolute;
+    right:100px;
+	top:44%;
+    margin-right:100px; /* half the width to obtain proper offset */
+	
+	
+}
+/* http://stackoverflow.com/questions/4675371/vertical-divider-css */
+.cls_vertical_divider span{
+     border-left:1px solid #38546d; 
+     border-right:1px solid #16222c; 
+     height:70px;
+     position:absolute;
+	 color:#7F9FFF;
+     
+}
+
+/* Channel list info style */
+
+#navigation{ padding-top:1em;  padding-bottom:1em;  border:solid 1px #4c4c4c;  overflow:hidden; bottom:5px; position:absolute;}
+ 
+#navigation div{ float:left; min-width:4em;  font-family: 'ralewaysemibold'; border:solid 0px red; 
+                  font-size:1.4em; color:#bebebe; margin-top:1em; margin-right:.5em;}
+
+.content_right #navigation .msg_btn{ width:5.5em; border:solid 0px red; margin-top:0em; margin-left:.8em; }
+
+.content_right #navigation .exit_btn{ margin-right:2.8em; }
+
+#navigation img{ vertical-align:middle; margin-right:.2em; margin-left:.5em;}
+
+.flipbox-container #navigation .msg_btn{ width:5.5em; border:solid 0px red; margin-top:0em; margin-left:.8em; }
+
+.flipbox-container #navigation .exit_btn{ margin-right:5em; }
+
+/* End Channel list info style */
